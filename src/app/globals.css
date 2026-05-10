@@ -1297,11 +1297,22 @@ body {
     grid-template-columns: 1fr;
   }
   .contact-info-card {
+    padding: 30px 20px;
     border-right: none;
     border-bottom: var(--border-thin);
+    text-align: center;
+  }
+  .contact-item {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .contact-item p {
+    max-width: 280px;
+    margin: 0 auto;
   }
   .map-wrapper {
-    min-height: 300px;
+    min-height: 350px;
   }
   .footer-grid {
     grid-template-columns: 1fr;
