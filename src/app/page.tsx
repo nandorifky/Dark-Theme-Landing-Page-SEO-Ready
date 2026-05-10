@@ -1,64 +1,47 @@
-import { MapPin, Phone, Clock, Star, Wind, Thermometer, CheckCircle, Wrench, MessageCircle, Shield, Zap, ThumbsUp, AlertTriangle, ArrowRight } from 'lucide-react';
+import { MapPin, Phone, Clock, Star, Wind, Thermometer, CheckCircle, Wrench, MessageCircle, Shield, Zap, ThumbsUp, AlertTriangle, ArrowRight, Lightbulb } from 'lucide-react';
 import BeforeAfterSlider from '../components/BeforeAfterSlider';
 import WhatsAppButton from '../components/WhatsAppButton';
 import Script from 'next/script';
+import Image from 'next/image';
+import { BUSINESS, REVIEWS, PRICING, FAQS, TIPS, BRANDS, SERVICE_AREAS, PROBLEMS } from '../config/site-data';
+import { Review } from '../types';
 
 export default function Home() {
-  const business = {
-    name: 'Lintang AC Kediri',
-    address: 'Jl. Pesantren VIII No.4, Pesantren, Kec. Pesantren, Kota Kediri, Jawa Timur 64131',
-    phone: '0896-9185-8866',
-    whatsappUrl: 'https://wa.me/6289691858866',
-    instagramUrl: 'https://instagram.com/lintangac',
-    googleMapsUrl: 'https://maps.app.goo.gl/EBBAZLQFJ7gn9TdT6',
-    openingHours: 'Buka Setiap Hari · Tutup pukul 22.00',
-    plusCode: '5382+2C Pesantren, Kota Kediri, Jawa Timur'
-  };
-
-  const reviews = [
-    { _id: '1', authorName: 'Narendra Digi', date: 'Oktober 2024', rating: 5, text: 'Real testimoni nyuci ac nya sangat bersih baik indor dan outdoor, teknisi nya juga ramah dan sopan bgt, ngga itu aja, td saya di edukasi juga tentang ac. Recommended bgt bagi kalian yg lg cari jasa ac di kediri 👍🏻' },
-    { _id: '2', authorName: 'Nadya Nurfadilla', date: 'November 2024', rating: 5, text: 'Pelayanan sangat baik, sudah beberapa kali memakai jasa Lintang AC Kediri untuk perawatan dan bongkar pasang selalu bisa diandalkan. Rekomend bagi yang cari service AC area Kediri.' },
-    { _id: '3', authorName: 'Restu Habibah', date: 'November 2024', rating: 5, text: 'Memuaskan, rapi banget hasilnya. Awalnya selang AC nya kesana kemari ga rapi, bocor. Diganti pipa sama kakak nya, jadi rapi. Kakak nya jg ramah. Rekomend banget, bintang 5 👌🏻👍🏻' }
-  ];
-
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "LocalBusiness", "name": business.name, "image": "/images/after.webp",
-        "@id": "https://lintangackediri.com", "url": "https://lintangackediri.com", "telephone": business.phone,
-        "address": { "@type": "PostalAddress", "streetAddress": "Jl. Pesantren VIII No.4, Pesantren", "addressLocality": "Kota Kediri", "addressRegion": "Jawa Timur", "postalCode": "64131", "addressCountry": "ID" },
-        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "345" },
+        "@type": "LocalBusiness", 
+        "name": BUSINESS.name, 
+        "image": "https://lintangackediri.com/images/after.webp",
+        "@id": "https://lintangackediri.com", 
+        "url": "https://lintangackediri.com", 
+        "telephone": BUSINESS.phone,
+        "address": { 
+          "@type": "PostalAddress", 
+          "streetAddress": "Jl. Pesantren VIII No.4, Pesantren", 
+          "addressLocality": "Kota Kediri", 
+          "addressRegion": "Jawa Timur", 
+          "postalCode": "64131", 
+          "addressCountry": "ID" 
+        },
+        "aggregateRating": { 
+          "@type": "AggregateRating", 
+          "ratingValue": "5.0", 
+          "reviewCount": "345" 
+        },
         "priceRange": "$$"
       },
       {
-        "@type": "FAQPage", "mainEntity": [
-          { "@type": "Question", "name": "Berapa harga service AC di Kediri?", "acceptedAnswer": { "@type": "Answer", "text": "Harga tergantung jenis layanan, ukuran PK, kondisi unit, dan lokasi. Untuk cuci AC mulai dari Rp50.000-an, sedangkan perbaikan dan pengisian freon menyesuaikan hasil pengecekan teknisi." } },
-          { "@type": "Question", "name": "Apakah bisa panggilan ke rumah?", "acceptedAnswer": { "@type": "Answer", "text": "Ya, teknisi Lintang AC Kediri melayani service AC panggilan ke rumah, kantor, ruko, kos, dan tempat usaha di area Kediri Kota dan Kabupaten." } },
-          { "@type": "Question", "name": "Apakah service AC bergaransi?", "acceptedAnswer": { "@type": "Answer", "text": "Ya, pengerjaan tertentu mendapatkan garansi sesuai jenis layanan dan kondisi unit." } },
-          { "@type": "Question", "name": "Kapan AC perlu dicuci?", "acceptedAnswer": { "@type": "Answer", "text": "Umumnya AC perlu dicuci setiap 2-3 bulan, terutama jika dipakai setiap hari, ruangan berdebu, atau AC mulai kurang dingin dan berbau." } }
-        ]
+        "@type": "FAQPage", 
+        "mainEntity": FAQS.map(faq => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+        }))
       }
     ]
   };
-
-  const masalahAC = [
-    'AC tidak dingin', 'AC bocor / menetes dari indoor', 'AC bau tidak sedap', 'AC berisik',
-    'AC mati total', 'AC hidup sebentar lalu mati', 'Outdoor AC tidak menyala', 'Remote AC tidak berfungsi',
-    'AC kurang angin', 'AC perlu tambah freon', 'Pipa AC bocor', 'Listrik turun saat AC dinyalakan'
-  ];
-
-  const hargaLayanan = [
-    { layanan: 'Cuci AC 0,5–1 PK', harga: 'Mulai Rp 50.000' },
-    { layanan: 'Cuci AC 1,5–2 PK', harga: 'Mulai Rp 70.000' },
-    { layanan: 'Pengecekan AC', harga: 'Mulai Rp 50.000' },
-    { layanan: 'Tambah Freon R32/R410A/R22', harga: 'Mulai Rp 100.000' },
-    { layanan: 'Bongkar AC', harga: 'Mulai Rp 100.000' },
-    { layanan: 'Pasang AC Baru', harga: 'Mulai Rp 200.000' },
-    { layanan: 'Bongkar Pasang AC (Relokasi)', harga: 'Mulai Rp 250.000' },
-  ];
-
-  const areaLayanan = ['Pesantren', 'Mojoroto', 'Kota Kediri', 'Ngasem', 'Gurah', 'Gampengrejo', 'Wates', 'Pare', 'Plosoklaten', 'Papar'];
 
   return (
     <>
@@ -77,8 +60,14 @@ export default function Home() {
               </div>
             </div>
             <div className="hero-image-wrapper">
-              <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=1000&auto=format&fit=crop" alt="Teknisi service AC Kediri - Lintang AC" />
-            </div>
+              <Image
+                src="/images/Teknisi-Service-AC.webp"
+                alt="Teknisi service AC Kediri - Lintang AC"
+                width={600}
+                height={400}
+                priority
+                style={{ width: '100%', height: 'auto' }}
+              />            </div>
           </div>
         </section>
 
@@ -90,6 +79,18 @@ export default function Home() {
               <div className="trust-item"><Clock size={18} className="text-accent" /> Buka Setiap Hari</div>
               <div className="trust-item"><Shield size={18} className="text-accent" /> Bergaransi</div>
               <div className="trust-item"><MapPin size={18} className="text-accent" /> Teknisi Datang ke Lokasi</div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== BRAND SECTION ===== */}
+        <section className="section" style={{ padding: '40px 0', borderBottom: '1px solid var(--border-color)' }}>
+          <div className="container">
+            <p style={{ textAlign: 'center', marginBottom: '20px', fontFamily: 'var(--font-mono)', fontSize: '13px', opacity: 0.6 }}>MERK AC YANG KAMI TANGANI</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '30px', opacity: 0.5 }}>
+              {BRANDS.map(brand => (
+                <span key={brand} style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '18px' }}>{brand}</span>
+              ))}
             </div>
           </div>
         </section>
@@ -120,7 +121,7 @@ export default function Home() {
               </div>
               <div className="service-item-full">
                 <div className="service-item-header"><CheckCircle className="service-icon" size={32} /><h3>Bongkar Pasang AC Kediri</h3></div>
-                <p>Relokasi AC rumah, kantor, kos, dan ruko dengan instalasi rapi, pipa tertata, flaring presisi, dan pengecekan vakum sistem agar performa optimal.</p>
+                <p>Relokasi AC rumah, kantor, kos, dan ruko dengan instalasi rapi, pipa tertata, flaring presisi, and pengecekan vakum sistem agar performa optimal.</p>
               </div>
             </div>
           </div>
@@ -134,7 +135,7 @@ export default function Home() {
               <h2 className="section-title">Masalah AC yang Sering Kami Tangani</h2>
             </div>
             <div className="problems-grid">
-              {masalahAC.map((item) => (
+              {PROBLEMS.map((item) => (
                 <div key={item} className="problem-item">
                   <AlertTriangle size={18} className="text-accent" />
                   <span>{item}</span>
@@ -160,18 +161,41 @@ export default function Home() {
                   <tr><th>Layanan</th><th>Estimasi Harga</th></tr>
                 </thead>
                 <tbody>
-                  {hargaLayanan.map((item) => (
+                  {PRICING.map((item) => (
                     <tr key={item.layanan}><td>{item.layanan}</td><td className="text-accent">{item.harga}</td></tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="pricing-note">* Harga dapat berubah sesuai kondisi AC, jarak lokasi, jenis freon, dan kebutuhan sparepart. Konsultasi awal via WhatsApp <strong>gratis</strong>.</p>
+            <p className="pricing-note">* Harga dapat berubah sesuai kondisi AC, jarak lokasi, jenis freon, and kebutuhan sparepart. Konsultasi awal via WhatsApp <strong>gratis</strong>.</p>
+          </div>
+        </section>
+
+        {/* ===== EDUKASI/TIPS SECTION ===== */}
+        <section className="section" style={{ backgroundColor: '#0a0a0a' }}>
+          <div className="container">
+            <div className="section-header">
+              <span className="section-subtitle">EDUKASI //</span>
+              <h2 className="section-title">Tips Merawat AC Agar Awet</h2>
+            </div>
+            <div className="features-grid">
+              {TIPS.map(tip => (
+                <div key={tip.title} className="feature-card">
+                  <div className="feature-icon-wrapper">
+                    {tip.icon === 'AlertTriangle' && <AlertTriangle size={28} />}
+                    {tip.icon === 'Zap' && <Zap size={28} />}
+                    {tip.icon === 'Wind' && <Wind size={28} />}
+                  </div>
+                  <h3>{tip.title}</h3>
+                  <p>{tip.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* ===== KEUNGGULAN ===== */}
-        <section id="keunggulan" className="section" style={{ backgroundColor: '#0a0a0a' }}>
+        <section id="keunggulan" className="section">
           <div className="container">
             <div className="section-header">
               <span className="section-subtitle">MENGAPA KAMI? //</span>
@@ -181,7 +205,7 @@ export default function Home() {
               <div className="feature-card">
                 <div className="feature-icon-wrapper"><ThumbsUp size={28} /></div>
                 <h3>Teknisi Profesional &amp; Ramah</h3>
-                <p>Tim ahli yang terlatih, bekerja dengan SOP kebersihan tinggi, dan mengedukasi pelanggan dengan transparan tentang kondisi AC.</p>
+                <p>Tim ahli yang terlatih, bekerja dengan SOP kebersihan tinggi, and mengedukasi pelanggan dengan transparan tentang kondisi AC.</p>
               </div>
               <div className="feature-card">
                 <div className="feature-icon-wrapper"><Shield size={28} /></div>
@@ -198,22 +222,22 @@ export default function Home() {
         </section>
 
         {/* ===== AREA LAYANAN ===== */}
-        <section className="section">
+        <section className="section" style={{ backgroundColor: '#0a0a0a' }}>
           <div className="container">
             <div className="section-header">
               <span className="section-subtitle">JANGKAUAN //</span>
               <h2 className="section-title">Area Layanan Service AC Kediri</h2>
             </div>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '30px', maxWidth: '800px' }}>
-              Kami melayani jasa service AC panggilan di Kota Kediri dan sekitarnya. Teknisi AC Kediri kami menjangkau seluruh kecamatan berikut:
+              Kami melayani jasa service AC panggilan di Kota Kediri and sekitarnya. Teknisi AC Kediri kami menjangkau seluruh kecamatan berikut:
             </p>
             <div className="area-grid">
-              {areaLayanan.map(area => (
+              {SERVICE_AREAS.map(area => (
                 <div key={area} className="area-tag"><MapPin size={14} /> {area}</div>
               ))}
             </div>
             <p style={{ color: 'var(--text-secondary)', marginTop: '20px', fontSize: '15px' }}>
-              Tidak melihat kecamatan Anda? <a href={business.whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-accent" style={{ textDecoration: 'underline' }}>Tanyakan via WhatsApp</a> — kemungkinan besar kami tetap melayani.
+              Tidak melihat kecamatan Anda? <a href={BUSINESS.whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-accent" style={{ textDecoration: 'underline' }}>Tanyakan via WhatsApp</a> — kemungkinan besar kami tetap melayani.
             </p>
           </div>
         </section>
@@ -224,7 +248,7 @@ export default function Home() {
             <div className="section-header">
               <span className="section-subtitle" style={{ color: 'var(--accent)' }}>BUKTI KERJA NYATA //</span>
               <h2 className="section-title">Galeri Hasil Cuci AC</h2>
-              <p style={{ color: 'rgba(255,255,255,0.6)', marginTop: '12px' }}>Geser garis pembatas untuk melihat perbedaan sebelum dan sesudah AC dicuci oleh teknisi kami.</p>
+              <p style={{ color: 'rgba(255,255,255,0.6)', marginTop: '12px' }}>Geser garis pembatas untuk melihat perbedaan sebelum and sesudah AC dicuci oleh teknisi kami.</p>
             </div>
             <div className="gallery-wrapper">
               <div className="gallery-frame">
@@ -247,7 +271,7 @@ export default function Home() {
               <h2 className="section-title">Testimoni Pelanggan Lintang AC Kediri</h2>
             </div>
             <div className="reviews-grid">
-              {reviews.map((review: any) => (
+              {REVIEWS.map((review: Review) => (
                 <div key={review._id} className="review-card">
                   <div className="review-header">
                     <div className="reviewer-avatar">{review.authorName.charAt(0)}</div>
@@ -255,7 +279,7 @@ export default function Home() {
                       <h4>{review.authorName}</h4>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <div className="stars">{Array.from({ length: review.rating }).map(() => '★').join('')}</div>
-                        <span style={{ fontSize: '13px', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>{review.date || review.timeAgo}</span>
+                        <span style={{ fontSize: '13px', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>{review.date}</span>
                       </div>
                     </div>
                   </div>
@@ -264,7 +288,7 @@ export default function Home() {
               ))}
             </div>
             <div style={{ textAlign: 'center', marginTop: '50px' }}>
-              <a href={business.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+              <a href={BUSINESS.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                 <Star size={18} /> Lihat Semua 345+ Ulasan di Google Maps
               </a>
             </div>
@@ -281,9 +305,9 @@ export default function Home() {
             <div className="steps-grid">
               <div className="step-card"><div className="step-num">01</div><h3>Chat WhatsApp</h3><p>Hubungi kami via WhatsApp, jelaskan keluhan AC atau layanan yang dibutuhkan.</p></div>
               <div className="step-arrow"><ArrowRight size={24} /></div>
-              <div className="step-card"><div className="step-num">02</div><h3>Konsultasi &amp; Jadwal</h3><p>Teknisi kami akan memberikan estimasi biaya dan menjadwalkan kunjungan ke lokasi Anda.</p></div>
+              <div className="step-card"><div className="step-num">02</div><h3>Konsultasi &amp; Jadwal</h3><p>Teknisi kami akan memberikan estimasi biaya and menjadwalkan kunjungan ke lokasi Anda.</p></div>
               <div className="step-arrow"><ArrowRight size={24} /></div>
-              <div className="step-card"><div className="step-num">03</div><h3>Teknisi Datang</h3><p>Teknisi datang tepat waktu, melakukan pengecekan, pengerjaan rapi, dan memberikan garansi.</p></div>
+              <div className="step-card"><div className="step-num">03</div><h3>Teknisi Datang</h3><p>Teknisi datang tepat waktu, melakukan pengecekan, pengerjaan rapi, and memberikan garansi.</p></div>
             </div>
           </div>
         </section>
@@ -296,36 +320,13 @@ export default function Home() {
               <h2 className="section-title">Pertanyaan Seputar Service AC Kediri</h2>
             </div>
             <div className="faq-grid">
-              <div className="faq-card">
-                <div className="faq-num">01</div>
-                <h3>Berapa harga service AC di Kediri?</h3>
-                <p>Harga tergantung jenis layanan, ukuran PK, kondisi unit, dan lokasi. Untuk cuci AC mulai dari Rp 50.000-an, sedangkan perbaikan dan pengisian freon menyesuaikan hasil pengecekan teknisi.</p>
-              </div>
-              <div className="faq-card">
-                <div className="faq-num">02</div>
-                <h3>Apakah bisa panggilan ke rumah?</h3>
-                <p>Ya, teknisi Lintang AC Kediri melayani service AC panggilan ke rumah, kantor, ruko, kos, dan tempat usaha di area Kediri Kota dan Kabupaten.</p>
-              </div>
-              <div className="faq-card">
-                <div className="faq-num">03</div>
-                <h3>Apakah service AC bergaransi?</h3>
-                <p>Ya, pengerjaan tertentu mendapatkan garansi sesuai jenis layanan dan kondisi unit. Kami menjunjung transparansi harga tanpa biaya tersembunyi.</p>
-              </div>
-              <div className="faq-card">
-                <div className="faq-num">04</div>
-                <h3>Kapan AC perlu dicuci?</h3>
-                <p>Umumnya AC perlu dicuci setiap 2–3 bulan, terutama jika dipakai setiap hari, ruangan berdebu, atau AC mulai kurang dingin dan berbau.</p>
-              </div>
-              <div className="faq-card">
-                <div className="faq-num">05</div>
-                <h3>Apakah bisa service AC hari Minggu?</h3>
-                <p>Ya, Lintang AC Kediri buka setiap hari termasuk hari Minggu dan libur nasional sampai pukul 22.00 WIB.</p>
-              </div>
-              <div className="faq-card">
-                <div className="faq-num">06</div>
-                <h3>Bagaimana cara booking?</h3>
-                <p>Cukup klik tombol "Booking Service AC" di halaman ini, isi form singkat, dan pesan Anda akan langsung terkirim ke WhatsApp teknisi kami.</p>
-              </div>
+              {FAQS.map((faq, index) => (
+                <div key={index} className="faq-card">
+                  <div className="faq-num">0{index + 1}</div>
+                  <h3>{faq.question}</h3>
+                  <p>{faq.answer}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -339,16 +340,16 @@ export default function Home() {
             </div>
             <div className="contact-container">
               <div className="contact-info-card">
-                <div className="contact-item"><div className="contact-icon-wrapper"><MapPin size={24} /></div><div><h4>Lokasi Bengkel</h4><p>{business.address}</p></div></div>
-                <div className="contact-item"><div className="contact-icon-wrapper"><Clock size={24} /></div><div><h4>Jam Operasional</h4><p>{business.openingHours}</p></div></div>
-                <div className="contact-item"><div className="contact-icon-wrapper"><Phone size={24} /></div><div><h4>Telepon / WhatsApp</h4><p>{business.phone}</p></div></div>
+                <div className="contact-item"><div className="contact-icon-wrapper"><MapPin size={24} /></div><div><h4>Lokasi Bengkel</h4><p>{BUSINESS.address}</p></div></div>
+                <div className="contact-item"><div className="contact-icon-wrapper"><Clock size={24} /></div><div><h4>Jam Operasional</h4><p>{BUSINESS.openingHours}</p></div></div>
+                <div className="contact-item"><div className="contact-icon-wrapper"><Phone size={24} /></div><div><h4>Telepon / WhatsApp</h4><p>{BUSINESS.phone}</p></div></div>
                 <div style={{ marginTop: '30px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   <WhatsAppButton mode="form" label="Booking Service AC" style={{ width: '100%', textAlign: 'center' }} />
                   <WhatsAppButton mode="direct" label="Chat Langsung" className="btn btn-secondary" style={{ width: '100%', textAlign: 'center' }} />
                 </div>
               </div>
               <div className="map-wrapper">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.5734777489715!2d112.05102099999999!3d-7.8348838999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78571ee9cfcee7%3A0xceb1af3cb8cb9efa!2sSERVICE%20AC%20KEDIRI%20-%20LINTANG%20AC%20KEDIRI!5e0!3m2!1sid!2sid!4v1777898203808!5m2!1sid!2sid" allowFullScreen={false} loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Peta Lokasi Lintang AC Kediri"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.5734777489715!2d112.05102099999999!3d-7.8348838999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78571ee9cfcee7%3A0xceb1af3cb8cb9efa!2sSERVICE%20AC%20KEDIRI%20-%20LINTANG%20AC%20KEDIRI!5e0!3m2!1id!2sid!4v1777898203808!5m2!1id!2sid" allowFullScreen={false} loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Peta Lokasi Lintang AC Kediri"></iframe>
               </div>
             </div>
           </div>

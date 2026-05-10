@@ -53,6 +53,7 @@ export default function WhatsAppButton({
   return (
     <>
       <button
+        type="button"
         onClick={() => setIsModalOpen(true)}
         className={className}
         style={style}
@@ -102,6 +103,7 @@ export default function WhatsAppButton({
                   id="booking-tanggal"
                   type="date"
                   required
+                  min={new Date().toISOString().split("T")[0]}
                   value={form.tanggal}
                   onChange={(e) => setForm({ ...form, tanggal: e.target.value })}
                 />

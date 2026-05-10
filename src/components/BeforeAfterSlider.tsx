@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
 
 interface BeforeAfterSliderProps {
   beforeImage: string;
@@ -61,15 +60,15 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAft
         setIsDragging(true);
         handleMove(e.touches[0].clientX);
       }}
+      style={{ userSelect: 'none', touchAction: 'none' }}
     >
       {/* After Image (Background) */}
       <div className="image-wrapper">
-        <Image 
+        <img 
           src={afterImage} 
           alt="Hasil setelah cuci AC Kediri" 
-          fill
-          style={{ objectFit: 'cover' }}
-          sizes="(max-width: 768px) 100vw, 800px"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          draggable={false}
         />
         <div 
           className="label label-after" 
@@ -84,12 +83,11 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAft
         className="image-wrapper before-image" 
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
-        <Image 
+        <img 
           src={beforeImage} 
           alt="Kondisi sebelum cuci AC" 
-          fill
-          style={{ objectFit: 'cover' }}
-          sizes="(max-width: 768px) 100vw, 800px"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          draggable={false}
         />
         <div 
           className="label label-before"
