@@ -11,29 +11,29 @@ export default function Home() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "LocalBusiness", 
-        "name": BUSINESS.name, 
+        "@type": "LocalBusiness",
+        "name": BUSINESS.name,
         "image": "https://lintangackediri.com/images/after.webp",
-        "@id": "https://lintangackediri.com", 
-        "url": "https://lintangackediri.com", 
+        "@id": "https://lintangackediri.com",
+        "url": "https://lintangackediri.com",
         "telephone": BUSINESS.phone,
-        "address": { 
-          "@type": "PostalAddress", 
-          "streetAddress": "Jl. Pesantren VIII No.4, Pesantren", 
-          "addressLocality": "Kota Kediri", 
-          "addressRegion": "Jawa Timur", 
-          "postalCode": "64131", 
-          "addressCountry": "ID" 
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Jl. Pesantren VIII No.4, Pesantren",
+          "addressLocality": "Kota Kediri",
+          "addressRegion": "Jawa Timur",
+          "postalCode": "64131",
+          "addressCountry": "ID"
         },
-        "aggregateRating": { 
-          "@type": "AggregateRating", 
-          "ratingValue": "5.0", 
-          "reviewCount": "345" 
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "reviewCount": "345"
         },
         "priceRange": "$$"
       },
       {
-        "@type": "FAQPage", 
+        "@type": "FAQPage",
         "mainEntity": FAQS.map(faq => ({
           "@type": "Question",
           "name": faq.question,
@@ -289,7 +289,7 @@ export default function Home() {
             </div>
             <div style={{ textAlign: 'center', marginTop: '50px' }}>
               <a href={BUSINESS.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                <Star size={18} /> Lihat Semua 345+ Ulasan di Google Maps
+                <Star size={18} /> 345+ Ulasan di Google Maps
               </a>
             </div>
           </div>
