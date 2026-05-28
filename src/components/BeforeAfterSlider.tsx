@@ -66,7 +66,7 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAft
       <div className="image-wrapper">
         <img 
           src={afterImage} 
-          alt="Hasil setelah cuci AC Kediri" 
+          alt="Hasil setelah cuci AC - Sebelum dan sesudah" 
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           draggable={false}
         />

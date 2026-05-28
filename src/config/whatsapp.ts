@@ -1,23 +1,23 @@
 /**
  * ============================================
- * KONFIGURASI WHATSAPP - Lintang AC Kediri
+ * KONFIGURASI WHATSAPP - Demo AC Service
  * ============================================
  * Ubah nomor dan teks di sini untuk semua tombol WhatsApp di website.
  */
 
 export const WHATSAPP_CONFIG = {
   // Nomor WhatsApp (format internasional tanpa +)
-  phoneNumber: '6289691858866',
+  phoneNumber: '6281234567890',
 
   // Teks default saat klik tombol WhatsApp langsung (Mode 1 - Direct)
-  defaultMessage: 'Halo Lintang AC Kediri, saya ingin konsultasi tentang service AC. Mohon informasinya.',
+  defaultMessage: 'Halo Demo AC Service, saya ingin konsultasi tentang service AC. Mohon informasinya.',
 
   // Teks untuk floating button
-  floatingMessage: 'Halo Lintang AC, saya butuh service AC. Bisa dibantu?',
+  floatingMessage: 'Halo Demo AC, saya butuh service AC. Bisa dibantu?',
 
   // Template pesan dari form booking (Mode 2 - Form Modal)
   // Variabel yang tersedia: {nama}, {alamat}, {tanggal}, {pesan}
-  bookingTemplate: `Halo Lintang AC Kediri, saya ingin booking service AC.
+  bookingTemplate: `Halo Demo AC Service, saya ingin booking service AC.
 
 *Nama:* {nama}
 *Alamat:* {alamat}

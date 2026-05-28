@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Wind, Menu, X } from 'lucide-react';
 import Link from 'next/link';
+import { BUSINESS } from '../config/site-data';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +25,7 @@ export default function Header() {
       <div className="container header-content">
         <Link href="/" className="logo" onClick={closeMenu}>
           <Wind size={28} className="spin-icon" />
-          <span>LINTANG <span className="text-accent">AC</span></span>
+          <span>{BUSINESS.name.split(' ')[0]} <span className="text-accent">AC</span></span>
         </Link>
 
         {/* Desktop Nav */}
@@ -54,7 +55,7 @@ export default function Header() {
         <div className="mobile-nav-header">
           <span className="logo" style={{ fontSize: '22px' }}>
             <Wind size={24} className="spin-icon" />
-            LINTANG <span className="text-accent">AC</span>
+            {BUSINESS.name.split(' ')[0]} <span className="text-accent">AC</span>
           </span>
           <button className="hamburger-btn" onClick={closeMenu} aria-label="Tutup menu">
             <X size={28} />

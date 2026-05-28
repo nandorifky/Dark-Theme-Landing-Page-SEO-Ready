@@ -1,5 +1,6 @@
 import { MapPin, Phone, Camera } from 'lucide-react';
 import { BUSINESS } from '../config/site-data';
+import { SEO_CONFIG } from '../config/seo-config';
 import WhatsAppIcon from './icons/WhatsAppIcon';
 
 export default function Footer() {
@@ -8,8 +9,8 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-col">
-            <h3>LINTANG <span className="text-highlight">AC</span></h3>
-            <p>Solusi lengkap masalah AC Anda. Kami melayani cuci, perbaikan, isi freon, dan bongkar pasang AC area Kediri.</p>
+            <h3>{BUSINESS.name.split(' ')[0]} <span className="text-highlight">AC</span></h3>
+            <p>Solusi lengkap masalah AC Anda. Kami melayani cuci, perbaikan, isi freon, dan bongkar pasang AC di seluruh area.</p>
           </div>
           <div className="footer-col">
             <h3>Kontak</h3>
@@ -26,7 +27,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Jasa Service AC Kediri - Lintang AC Kediri. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} {BUSINESS.name}. All rights reserved.</p>
           <div style={{ marginTop: '10px', display: 'flex', justifyContent: 'center', gap: '20px', fontSize: '12px', opacity: 0.7 }}>
             <a href="#">Kebijakan Privasi</a>
             <a href="#">Syarat & Ketentuan</a>

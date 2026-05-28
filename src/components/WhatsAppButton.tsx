@@ -91,7 +91,7 @@ export default function WhatsAppButton({
                   id="booking-alamat"
                   type="text"
                   required
-                  placeholder="Jl. ... RT/RW, Kel., Kec., Kota Kediri"
+                  placeholder="Jl. ... RT/RW, Kel., Kec., Kota"
                   value={form.alamat}
                   onChange={(e) => setForm({ ...form, alamat: e.target.value })}
                 />

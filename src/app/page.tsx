@@ -5,43 +5,16 @@ import Script from 'next/script';
 import Image from 'next/image';
 import { BUSINESS, REVIEWS, PRICING, FAQS, TIPS, BRANDS, SERVICE_AREAS, PROBLEMS } from '../config/site-data';
 import { Review } from '../types';
+import { generateFullSchema } from '../utils/schema-generator';
+import { THEME } from '../config/theme-config';
 
 export default function Home() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "LocalBusiness",
-        "name": BUSINESS.name,
-        "image": "https://lintangackediri.com/images/after.webp",
-        "@id": "https://lintangackediri.com",
-        "url": "https://lintangackediri.com",
-        "telephone": BUSINESS.phone,
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Jl. Pesantren VIII No.4, Pesantren",
-          "addressLocality": "Kota Kediri",
-          "addressRegion": "Jawa Timur",
-          "postalCode": "64131",
-          "addressCountry": "ID"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "5.0",
-          "reviewCount": "345"
-        },
-        "priceRange": "$$"
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": FAQS.map(faq => ({
-          "@type": "Question",
-          "name": faq.question,
-          "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
-        }))
-      }
-    ]
-  };
+  const jsonLd = generateFullSchema();
+
+  const sectionSubtitleStyle = { fontFamily: THEME.typography.fontFamily.mono, fontSize: '13px', opacity: 0.6 };
+  const textSecondaryStyle = { color: THEME.colors.text.secondary };
+  const borderBottomStyle = { borderBottom: `1px solid ${THEME.colors.border}` };
+  const accentColorStyle = { color: THEME.colors.accent.main };
 
   return (
     <>
@@ -52,8 +25,8 @@ export default function Home() {
           <div className="container hero-container">
             <div className="hero-content">
               <span className="hero-badge"><Zap size={14} /> TEKNISI DATANG KE LOKASI ANDA</span>
-              <h1>Service AC Kediri Panggilan Cepat &amp; Bergaransi</h1>
-              <p>Lintang AC Kediri melayani cuci AC, perbaikan AC tidak dingin, AC bocor, isi freon, bongkar pasang, dan instalasi AC untuk rumah, kantor, ruko, hingga kos di area Kediri. Teknisi datang ke lokasi, pengerjaan rapi, harga transparan, dan bergaransi.</p>
+              <h1>Service AC Panggilan Cepat &amp; Bergaransi</h1>
+              <p>Demo AC Service melayani cuci AC, perbaikan AC tidak dingin, AC bocor, isi freon, bongkar pasang, dan instalasi AC untuk rumah, kantor, ruko, hingga kos. Teknisi datang ke lokasi, pengerjaan rapi, harga transparan, dan bergaransi.</p>
               <div className="hero-actions">
                 <WhatsAppButton mode="form" label="Booking Service AC" />
                 <WhatsAppButton mode="direct" label="Chat Langsung" className="btn btn-secondary" />
@@ -62,7 +35,7 @@ export default function Home() {
             <div className="hero-image-wrapper">
               <Image
                 src="/images/Teknisi-Service-AC.webp"
-                alt="Teknisi service AC Kediri - Lintang AC"
+                alt="Teknisi service AC - Demo AC Service"
                 width={600}
                 height={400}
                 priority
@@ -84,12 +57,12 @@ export default function Home() {
         </section>
 
         {/* ===== BRAND SECTION ===== */}
-        <section className="section" style={{ padding: '40px 0', borderBottom: '1px solid var(--border-color)' }}>
+        <section className="section" style={{ padding: '40px 0', ...borderBottomStyle }}>
           <div className="container">
-            <p style={{ textAlign: 'center', marginBottom: '20px', fontFamily: 'var(--font-mono)', fontSize: '13px', opacity: 0.6 }}>MERK AC YANG KAMI TANGANI</p>
+            <p style={{ textAlign: 'center', marginBottom: '20px', ...sectionSubtitleStyle }}>MERK AC YANG KAMI TANGANI</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '30px', opacity: 0.5 }}>
               {BRANDS.map(brand => (
-                <span key={brand} style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '18px' }}>{brand}</span>
+                <span key={brand} style={{ fontFamily: THEME.typography.fontFamily.heading, fontWeight: 700, fontSize: '18px' }}>{brand}</span>
               ))}
             </div>
           </div>
@@ -100,16 +73,16 @@ export default function Home() {
           <div className="container">
             <div className="section-header">
               <span className="section-subtitle">LAYANAN KAMI</span>
-              <h2 className="section-title">Layanan Service AC Kediri</h2>
+              <h2 className="section-title">Layanan Service AC Kami</h2>
             </div>
             <div className="services-grid-full">
               <div className="service-item-full">
-                <div className="service-item-header"><Wind className="service-icon" size={32} /><h3>Cuci AC Kediri</h3></div>
+                <div className="service-item-header"><Wind className="service-icon" size={32} /><h3>Cuci AC</h3></div>
                 <p>Membersihkan indoor, outdoor, filter, evaporator, blower, dan saluran pembuangan agar AC kembali dingin, tidak bau, dan lebih hemat listrik. Cocok untuk perawatan rutin setiap 2–3 bulan.</p>
               </div>
               <div className="service-item-full">
                 <div className="service-item-header"><Wrench className="service-icon" size={32} /><h3>Perbaikan AC Tidak Dingin</h3></div>
-                <p>Pengecekan tekanan freon, kapasitor, sensor, kompresor, evaporator, kebocoran pipa, dan komponen kelistrikan. Diagnosa akurat oleh teknisi AC Kediri berpengalaman.</p>
+                <p>Pengecekan tekanan freon, kapasitor, sensor, kompresor, evaporator, kebocoran pipa, dan komponen kelistrikan. Diagnosa akurat oleh teknisi profesional berpengalaman.</p>
               </div>
               <div className="service-item-full">
                 <div className="service-item-header"><AlertTriangle className="service-icon" size={32} /><h3>Service AC Bocor Air</h3></div>
@@ -120,7 +93,7 @@ export default function Home() {
                 <p>Pengisian freon R32, R410A, dan R22 sesuai kebutuhan unit. Catatan: freon tidak selalu perlu ditambah jika tidak ada kebocoran, teknisi kami akan cek terlebih dahulu.</p>
               </div>
               <div className="service-item-full">
-                <div className="service-item-header"><CheckCircle className="service-icon" size={32} /><h3>Bongkar Pasang AC Kediri</h3></div>
+                <div className="service-item-header"><CheckCircle className="service-icon" size={32} /><h3>Bongkar Pasang AC</h3></div>
                 <p>Relokasi AC rumah, kantor, kos, dan ruko dengan instalasi rapi, pipa tertata, flaring presisi, and pengecekan vakum sistem agar performa optimal.</p>
               </div>
             </div>
@@ -142,8 +115,8 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: '30px', maxWidth: '700px' }}>
-              Mengalami salah satu masalah di atas? Langsung hubungi teknisi AC Kediri kami untuk pengecekan dan perbaikan di lokasi Anda.
+            <p style={{ ...textSecondaryStyle, marginTop: '30px', maxWidth: '700px' }}>
+              Mengalami salah satu masalah di atas? Langsung hubungi kami untuk pengecekan dan perbaikan di lokasi Anda.
             </p>
           </div>
         </section>
@@ -153,7 +126,7 @@ export default function Home() {
           <div className="container">
             <div className="section-header">
               <span className="section-subtitle">ESTIMASI BIAYA //</span>
-              <h2 className="section-title">Harga Service AC Kediri</h2>
+              <h2 className="section-title">Harga Service AC Kami</h2>
             </div>
             <div className="pricing-table-wrapper">
               <table className="pricing-table">
@@ -199,7 +172,7 @@ export default function Home() {
           <div className="container">
             <div className="section-header">
               <span className="section-subtitle">MENGAPA KAMI? //</span>
-              <h2 className="section-title">Keunggulan Lintang AC Kediri</h2>
+              <h2 className="section-title">Keunggulan Demo AC Service</h2>
             </div>
             <div className="features-grid">
               <div className="feature-card">
@@ -215,7 +188,7 @@ export default function Home() {
               <div className="feature-card">
                 <div className="feature-icon-wrapper"><Zap size={28} /></div>
                 <h3>Pengerjaan Cepat Kilat</h3>
-                <p>Respons cepat untuk panggilan darurat di area Kediri. Teknisi AC Kediri kami siap datang ke lokasi tepat waktu.</p>
+                <p>Respons cepat untuk panggilan darurat. Teknisi kami siap datang ke lokasi tepat waktu sesuai jadwal.</p>
               </div>
             </div>
           </div>
@@ -226,17 +199,17 @@ export default function Home() {
           <div className="container">
             <div className="section-header">
               <span className="section-subtitle">JANGKAUAN //</span>
-              <h2 className="section-title">Area Layanan Service AC Kediri</h2>
+              <h2 className="section-title">Area Layanan Service AC</h2>
             </div>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '30px', maxWidth: '800px' }}>
-              Kami melayani jasa service AC panggilan di Kota Kediri and sekitarnya. Teknisi AC Kediri kami menjangkau seluruh kecamatan berikut:
+            <p style={{ ...textSecondaryStyle, marginBottom: '30px', maxWidth: '800px' }}>
+              Kami melayani jasa service AC panggilan di berbagai area dan sekitarnya. Teknisi kami menjangkau seluruh wilayah berikut:
             </p>
             <div className="area-grid">
               {SERVICE_AREAS.map(area => (
                 <div key={area} className="area-tag"><MapPin size={14} /> {area}</div>
               ))}
             </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: '20px', fontSize: '15px' }}>
+            <p style={{ ...textSecondaryStyle, marginTop: '20px', fontSize: '15px' }}>
               Tidak melihat kecamatan Anda? <a href={BUSINESS.whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-accent" style={{ textDecoration: 'underline' }}>Tanyakan via WhatsApp</a> — kemungkinan besar kami tetap melayani.
             </p>
           </div>
@@ -246,7 +219,7 @@ export default function Home() {
         <section id="galeri" className="section gallery-section">
           <div className="container">
             <div className="section-header">
-              <span className="section-subtitle" style={{ color: 'var(--accent)' }}>BUKTI KERJA NYATA //</span>
+              <span className="section-subtitle" style={{ ...accentColorStyle }}>BUKTI KERJA NYATA //</span>
               <h2 className="section-title">Galeri Hasil Cuci AC</h2>
               <p style={{ color: 'rgba(255,255,255,0.6)', marginTop: '12px' }}>Geser garis pembatas untuk melihat perbedaan sebelum and sesudah AC dicuci oleh teknisi kami.</p>
             </div>
@@ -268,7 +241,7 @@ export default function Home() {
           <div className="container">
             <div className="section-header">
               <span className="section-subtitle">ULASAN GOOGLE //</span>
-              <h2 className="section-title">Testimoni Pelanggan Lintang AC Kediri</h2>
+              <h2 className="section-title">Testimoni Pelanggan Demo AC Service</h2>
             </div>
             <div className="reviews-grid">
               {REVIEWS.map((review: Review) => (
@@ -279,7 +252,7 @@ export default function Home() {
                       <h4>{review.authorName}</h4>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <div className="stars">{Array.from({ length: review.rating }).map(() => '★').join('')}</div>
-                        <span style={{ fontSize: '13px', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>{review.date}</span>
+                        <span style={{ fontSize: '13px', ...textSecondaryStyle, fontFamily: THEME.typography.fontFamily.mono }}>{review.date}</span>
                       </div>
                     </div>
                   </div>
@@ -317,7 +290,7 @@ export default function Home() {
           <div className="container">
             <div className="section-header">
               <span className="section-subtitle">FAQ //</span>
-              <h2 className="section-title">Pertanyaan Seputar Service AC Kediri</h2>
+              <h2 className="section-title">Pertanyaan Seputar Service AC Kami</h2>
             </div>
             <div className="faq-grid">
               {FAQS.map((faq, index) => (
@@ -349,7 +322,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="map-wrapper">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.5734777489715!2d112.05102099999999!3d-7.8348838999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78571ee9cfcee7%3A0xceb1af3cb8cb9efa!2sSERVICE%20AC%20KEDIRI%20-%20LINTANG%20AC%20KEDIRI!5e0!3m2!1id!2sid!4v1777898203808!5m2!1id!2sid" allowFullScreen={false} loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Peta Lokasi Lintang AC Kediri"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.95565!3d-37.8162!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0!2zMzcuODE2MiDCsCA2MDAuMCdOIDEwLCAxNDQuOTU1N9CBRCDB5iwgOTQyOTEx!5e0!3m2!1id!2sid!4v1234567890" allowFullScreen={false} loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Peta Lokasi Demo AC Service"></iframe>
               </div>
             </div>
           </div>
